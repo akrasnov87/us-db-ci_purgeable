@@ -1,12 +1,11 @@
-CREATE OR REPLACE FUNCTION core.sf_reset_pwd(_login text, _new_password text, _f_org integer) RETURNS text
+CREATE OR REPLACE FUNCTION core.sf_reset_pwd(_login text, _new_password text) RETURNS text
     LANGUAGE plpgsql
     AS $$
 /** 
- * @params {text} _login - логин
- * @params {text} _new_password - пароль
- * @params {integer} _f_org - иден. родительского пользователя
- * 
- * @returns {boolean} - результат обработки
+	Сброс пароля пользователя
+	
+	login: text 		- логин
+	_new_password: text - пароль
  */
 DECLARE
 	_is_hash 	boolean;
@@ -19,24 +18,24 @@ BEGIN
 		UPDATE core.pd_users AS u
 		SET s_hash = crypt(_new_password, gen_salt('bf')),
 		c_password = null
-		WHERE u.c_login = _login AND CASE WHEN _f_org IS NULL THEN 1=1 ELSE u.f_org = _f_org END;
+		WHERE u.c_login = _login;
 
 		RETURN (SELECT 	u.c_email 
 		FROM core.pd_users AS u 
-		WHERE u.c_login = _login AND CASE WHEN _f_org IS NULL THEN 1=1 ELSE u.f_org = _f_org END);
+		WHERE u.c_login = _login);
 	ELSE
 		UPDATE core.pd_users AS u
 		SET c_password = _new_password,
 		s_hash = null
-		WHERE u.c_login = _login AND CASE WHEN _f_org IS NULL THEN 1=1 ELSE u.f_org = _f_org END;
+		WHERE u.c_login = _login;
 
 		RETURN (SELECT 	u.c_email 
 		FROM core.pd_users AS u 
-		WHERE u.c_login = _login AND CASE WHEN _f_org IS NULL THEN 1=1 ELSE u.f_org = _f_org END);
+		WHERE u.c_login = _login);
 	END IF;
 END
 $$;
 
-ALTER FUNCTION core.sf_reset_pwd(_login text, _new_password text, _f_org integer) OWNER TO us;
+ALTER FUNCTION core.sf_reset_pwd(_login text, _new_password text) OWNER TO us;
 
-COMMENT ON FUNCTION core.sf_reset_pwd(_login text, _new_password text, _f_org integer) IS 'Сброс пароля пользователя';
+COMMENT ON FUNCTION core.sf_reset_pwd(_login text, _new_password text) IS 'Сброс пароля пользователя';

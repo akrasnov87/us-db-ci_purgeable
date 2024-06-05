@@ -7,13 +7,14 @@ CREATE TABLE core.pd_users (
 	jb_data jsonb,
 	d_last_auth_date timestamp without time zone,
 	d_last_change_password timestamp without time zone,
-	b_key boolean DEFAULT true NOT NULL,
+	b_key boolean DEFAULT false NOT NULL,
 	b_disabled boolean DEFAULT false NOT NULL,
 	d_created_date timestamp without time zone DEFAULT now(),
 	c_created_user text DEFAULT 'iserv'::text NOT NULL,
 	d_change_date timestamp without time zone,
 	c_change_user text,
-	sn_delete boolean DEFAULT false NOT NULL
+	sn_delete boolean DEFAULT false NOT NULL,
+	d_expired_date timestamp without time zone
 );
 
 ALTER TABLE core.pd_users OWNER TO us;
@@ -47,6 +48,8 @@ COMMENT ON COLUMN core.pd_users.d_change_date IS 'Дата обновления 
 COMMENT ON COLUMN core.pd_users.c_change_user IS 'Логин пользователья изменившего запись';
 
 COMMENT ON COLUMN core.pd_users.sn_delete IS 'Удален';
+
+COMMENT ON COLUMN core.pd_users.d_expired_date IS 'Срок действия';
 
 --------------------------------------------------------------------------------
 

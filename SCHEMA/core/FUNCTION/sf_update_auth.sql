@@ -35,8 +35,7 @@ BEGIN
 		END IF;
 	ELSE
 		UPDATE core.pd_users AS u 
-		SET d_last_auth_date = now(), 
-		c_version = _c_version 
+		SET d_last_auth_date = now()
 		WHERE u.id = _f_user;
 	END IF;
 	

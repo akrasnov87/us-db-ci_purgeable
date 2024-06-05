@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION core.pf_accesses(n_user_id integer) RETURNS TABLE(table_name text, record_criteria text, rpc_function text, column_name text, c_ui_module text, c_ui_chapter text, c_ui_function text, is_editable boolean, is_deletable boolean, is_creatable boolean, is_fullcontrol boolean, access integer)
+CREATE OR REPLACE FUNCTION core.pf_accesses(n_user_id integer) RETURNS TABLE(table_name text, record_criteria text, rpc_function text, column_name text, is_editable boolean, is_deletable boolean, is_creatable boolean, is_fullcontrol boolean, access integer)
     LANGUAGE plpgsql
     AS $$
 /**
@@ -11,9 +11,6 @@ BEGIN
 	        a.c_criteria,
 	        a.c_function,
 	        a.c_columns,
-	        a.c_ui_module,
-	        a.c_ui_chapter,
-	        a.c_ui_function,
 	        a.b_editable, 
 	        a.b_deletable, 
 	        a.b_creatable, 
