@@ -16,7 +16,7 @@ BEGIN
 	
 	IF _is_hash THEN
 		UPDATE core.pd_users AS u
-		SET s_hash = crypt(_new_password, gen_salt('bf')),
+		SET s_hash = public.crypt(_new_password, public.gen_salt('bf')),
 		c_password = null
 		WHERE u.c_login = _login;
 

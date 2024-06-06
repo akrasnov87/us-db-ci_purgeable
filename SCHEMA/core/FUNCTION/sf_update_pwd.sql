@@ -16,14 +16,14 @@ BEGIN
 	SELECT 
 		CASE WHEN u.s_hash is NULL 
 			THEN u.c_password = _password 
-			ELSE crypt(_password, u.s_hash) = u.s_hash 
+			ELSE public.crypt(_password, u.s_hash) = u.s_hash 
 		END, u.s_hash IS NOT NULL INTO _b_verify, _b_hash
 	FROM core.pd_users AS u WHERE u.c_login = _login AND u.b_disabled = false AND u.sn_delete = false;
 	
 	IF _b_verify THEN 
 		IF _b_hash THEN
 			UPDATE core.pd_users AS u
-			SET s_hash = crypt(_new_password, gen_salt('bf')),
+			SET s_hash = public.crypt(_new_password, public.gen_salt('bf')),
 			c_password = null
 			WHERE u.c_login = _login;
 			

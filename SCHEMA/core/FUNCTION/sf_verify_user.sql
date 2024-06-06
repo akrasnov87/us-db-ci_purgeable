@@ -35,7 +35,7 @@ BEGIN
 		SELECT (CASE WHEN t.b_verify THEN t.id ELSE -1 END), t.b_key INTO _f_user_without_device, _b_key FROM (SELECT 
 			CASE WHEN u.s_hash IS NULL 
 				THEN u.c_password = _password 
-				ELSE crypt(_password, u.s_hash) = u.s_hash 
+				ELSE public.crypt(_password, u.s_hash) = u.s_hash 
 			END AS b_verify,
 			u.id,
 			u.b_key
