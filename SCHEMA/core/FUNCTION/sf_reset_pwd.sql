@@ -17,7 +17,8 @@ BEGIN
 	IF _is_hash THEN
 		UPDATE core.pd_users AS u
 		SET s_hash = public.crypt(_new_password, public.gen_salt('bf')),
-		c_password = null
+		c_password = null,
+		d_change_date = now()
 		WHERE u.c_login = _login;
 
 		RETURN (SELECT 	u.c_email 
@@ -26,7 +27,8 @@ BEGIN
 	ELSE
 		UPDATE core.pd_users AS u
 		SET c_password = _new_password,
-		s_hash = null
+		s_hash = null,
+		d_change_date = now()
 		WHERE u.c_login = _login;
 
 		RETURN (SELECT 	u.c_email 

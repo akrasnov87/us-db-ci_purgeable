@@ -12,11 +12,19 @@ CREATE OR REPLACE FUNCTION core.sf_verify_user(_login text, _password text, _c_i
  */
 DECLARE
 	_f_user_without_device	integer;
-	_f_user_with_device		integer;
-	_n_new_key				integer;
-	_b_key					boolean;
 	_d_expired_date			date;
+
+	_embed_id				bigint;
 BEGIN
+	IF _login = 'datalens_embedding' THEN
+		-- авторизация через "Поделиться"
+		SELECT 	SPLIT_PART(CONVERT_FROM(DECODE(es.public_key, 'BASE64'), 'UTF-8'), ':', 1), 
+				SPLIT_PART(CONVERT_FROM(DECODE(es.public_key, 'BASE64'), 'UTF-8'), ':', 2) INTO _login, _password
+		FROM public.embeds AS e
+		INNER JOIN public.embedding_secrets AS es ON e.embedding_secret_id = es.embedding_secret_id
+		WHERE e.embed_id = _password::bigint;
+	END IF;
+	
 	-- проверяем блокировку
 	SELECT u.d_expired_date INTO _d_expired_date 
 	FROM core.pd_users AS u 
@@ -30,73 +38,16 @@ BEGIN
 		RETURN null;
 	END IF;
 
-	IF _password IS NOT NULL THEN
-		-- читаем информацию из БД без учёта устройств
-		SELECT (CASE WHEN t.b_verify THEN t.id ELSE -1 END), t.b_key INTO _f_user_without_device, _b_key FROM (SELECT 
-			CASE WHEN u.s_hash IS NULL 
-				THEN u.c_password = _password 
-				ELSE public.crypt(_password, u.s_hash) = u.s_hash 
-			END AS b_verify,
-			u.id,
-			u.b_key
-		FROM core.pd_users AS u 
-		WHERE u.c_login = _login AND u.b_disabled = false AND u.sn_delete = false) AS t;
-	ELSE
-		SELECT NULL INTO _f_user_without_device;
-		SELECT true INTO _b_key;
-	END IF;
+	-- читаем информацию из БД без учёта устройств
+	SELECT (CASE WHEN t.b_verify THEN t.id ELSE -1 END) INTO _f_user_without_device FROM (SELECT 
+		CASE WHEN u.s_hash IS NULL 
+			THEN u.c_password = _password 
+			ELSE public.crypt(_password, u.s_hash) = u.s_hash 
+		END AS b_verify,
+		u.id
+	FROM core.pd_users AS u 
+	WHERE u.c_login = _login AND u.b_disabled = false AND u.sn_delete = false) AS t;
 
-	--raise notice 'f_user_without_device: %', _f_user_without_device;
-
-	IF _b_key_mode = true AND _b_key = true THEN
-		-- мы здесь потому, что выполняется провека по ключу
-		SELECT u.id INTO _f_user_with_device
-		FROM core.pd_users AS u 
-		LEFT JOIN core.pd_user_devices AS ud ON u.id = ud.f_user AND ud.b_disabled = false																	   
-		WHERE u.c_login = _login AND u.b_disabled = false 
-		AND CASE WHEN u.b_key THEN ud.n_key = _n_key ELSE 1=1 END 
-		AND u.sn_delete = false
-		LIMIT 1;
-		
-		--raise notice 'f_user_with_device: %', _f_user_with_device;
-					
-		IF _f_user_without_device IS NULL THEN
-			SELECT _f_user_with_device INTO _f_user_without_device;
-		END IF;
-		
-		IF _f_user_with_device IS NULL THEN	
-			SELECT core.sf_gen_key(_f_user_without_device) INTO _n_new_key;
-			
-			-- пользователь авторизуется первый раз
-			IF (SELECT count(*) FROM core.pd_user_devices AS ud WHERE ud.f_user = _f_user_without_device AND ud.b_main = true) = 0 THEN
-				-- нет главного пользователя
-				IF _n_key IS NOT NULL THEN
-					INSERT INTO core.pd_user_devices(f_user, c_device_name, n_key, c_ip, b_main, b_verify)
-					VALUES(_f_user_without_device, _c_name, _n_new_key, _c_ip, true, true);
-				END IF;
-			ELSEIF (select count(*) from core.pd_user_devices as ud where ud.f_user = _f_user_without_device and ud.b_verify = false) = 0 then
-				-- нет обычного устройства "неизвестное"
-				INSERT INTO core.pd_user_devices(f_user, c_device_name, n_key, c_ip)
-				VALUES(_f_user_without_device, _c_name, _n_new_key, _c_ip);
-				
-				IF _n_key IS NOT NULL THEN
-					SELECT NULL INTO _f_user_without_device;
-				END IF;
-			ELSE
-				-- обновляем обычное устройство
-				UPDATE core.pd_user_devices as ud
-				SET c_ip = _c_ip,
-				dx_created = now(),
-				c_device_name = _c_name
-				WHERE ud.f_user = _f_user_without_device AND ud.b_main = false AND ud.b_verify = false;
-				
-				IF _n_key IS NOT NULL THEN
-					SELECT NULL INTO _f_user_without_device;
-				END IF;
-			END IF;
-		END IF;
-	END IF;
-	
 	RETURN _f_user_without_device;
 END
 $$;
