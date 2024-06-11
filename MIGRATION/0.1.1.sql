@@ -207,7 +207,8 @@ BEGIN
 		UPDATE core.pd_users AS u
 		SET s_hash = public.crypt(_new_password, public.gen_salt('bf')),
 		c_password = null,
-		d_change_date = now()
+		d_change_date = now(),
+		d_last_change_password = now()
 		WHERE u.c_login = _login;
 
 		RETURN (SELECT 	u.c_email 
@@ -217,7 +218,8 @@ BEGIN
 		UPDATE core.pd_users AS u
 		SET c_password = _new_password,
 		s_hash = null,
-		d_change_date = now()
+		d_change_date = now(),
+		d_last_change_password = now()
 		WHERE u.c_login = _login;
 
 		RETURN (SELECT 	u.c_email 
@@ -254,7 +256,8 @@ BEGIN
 			UPDATE core.pd_users AS u
 			SET s_hash = public.crypt(_new_password, public.gen_salt('bf')),
 			c_password = null,
-			d_change_date = now()
+			d_change_date = now(),
+			d_last_change_password = now()
 			WHERE u.c_login = _login;
 			
 			RETURN TRUE;
@@ -262,7 +265,8 @@ BEGIN
 			UPDATE core.pd_users AS u
 			SET c_password = _new_password,
 			s_hash = null,
-			d_change_date = now()
+			d_change_date = now(),
+			d_last_change_password = now()
 			WHERE u.c_login = _login;
 			
 			RETURN TRUE;
