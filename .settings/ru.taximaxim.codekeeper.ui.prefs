@@ -1,0 +1,11 @@
+disableParserInExternalFiles=false
+eclipse.preferences.version=1
+formatObjectCodeAutomatically=false
+prefEnableBodyDependencies=false
+prefEnableProjPrefRoot=false
+prefForceUnixNewlines=true
+prefGeneralTimezone=UTC
+prefIgnoreColumnOrder=false
+prefNoPrivileges=false
+prefSimplifyView=false
+prefUseGlobalIgnoreList=true
