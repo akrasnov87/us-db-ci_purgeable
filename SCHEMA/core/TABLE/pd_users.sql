@@ -4,6 +4,7 @@ CREATE TABLE core.pd_users (
 	c_password text,
 	s_hash text,
 	c_email text,
+	c_project_name text,
 	jb_data jsonb,
 	d_last_auth_date timestamp without time zone,
 	d_last_change_password timestamp without time zone,
@@ -30,6 +31,8 @@ COMMENT ON COLUMN core.pd_users.c_password IS 'Пароль';
 COMMENT ON COLUMN core.pd_users.s_hash IS 'Hash';
 
 COMMENT ON COLUMN core.pd_users.c_email IS 'Адрес электронной почты';
+
+COMMENT ON COLUMN core.pd_users.c_project_name IS 'Имя проекта';
 
 COMMENT ON COLUMN core.pd_users.d_last_auth_date IS 'Дата последней авторизации';
 

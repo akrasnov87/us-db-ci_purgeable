@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION core.sf_users_by_login_with_alias(_c_login text, _alias boolean) RETURNS TABLE(id integer, c_login text, c_claims text, b_disabled boolean, d_created_date timestamp without time zone, d_change_date timestamp without time zone, d_last_auth_date timestamp without time zone, f_avatar uuid, c_email text, c_claims_name text, f_org integer, c_profile text, f_profile integer, c_profile_const text, f_level integer, c_level text, c_intg_host text, f_alias integer, f_original integer)
+CREATE OR REPLACE FUNCTION core.sf_users_by_login_with_alias(_c_login text, _alias boolean) RETURNS TABLE(id integer, c_login text, c_claims text, b_disabled boolean, d_created_date timestamp without time zone, d_change_date timestamp without time zone, d_last_auth_date timestamp without time zone, c_email text, c_project_name text, c_claims_name text)
     LANGUAGE plpgsql
     AS $$
 /**

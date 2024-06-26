@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 nameOfBoundDatabase=
 prefLastDbStore=us@127.0.0.1/us-db-ci_purgeable
-prefLastDbStoreEditor=postgres@dev-db-v-10/skr-dev-db
+prefLastDbStoreEditor=us@127.0.0.1/us-db-ci_purgeable
 prefLastDirection=false
