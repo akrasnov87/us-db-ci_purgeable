@@ -3,6 +3,7 @@ CREATE TABLE core.pd_roles (
 	c_name text NOT NULL,
 	c_description text,
 	n_weight integer DEFAULT 0 NOT NULL,
+	b_base boolean DEFAULT false NOT NULL,
 	d_created_date timestamp without time zone DEFAULT now() NOT NULL,
 	c_created_user text DEFAULT 'iserv'::text NOT NULL,
 	d_change_date timestamp without time zone,
@@ -31,6 +32,8 @@ COMMENT ON COLUMN core.pd_roles.d_change_date IS 'Дата обновления 
 COMMENT ON COLUMN core.pd_roles.c_change_user IS 'Автор изменения';
 
 COMMENT ON COLUMN core.pd_roles.sn_delete IS 'Удален';
+
+COMMENT ON COLUMN core.pd_roles.b_base IS 'Признак базовой роли';
 
 --------------------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION core.of_users(sender jsonb, params jsonb) RETURNS TABLE(id integer, c_login text, c_claims text, b_disabled boolean, d_created_date timestamp without time zone, d_change_date timestamp without time zone, d_last_auth_date timestamp without time zone, c_email text, c_project_name text, c_claims_name text, jb_data jsonb)
+CREATE OR REPLACE FUNCTION core.of_users(sender jsonb, params jsonb) RETURNS TABLE(id integer, c_login text, c_claims text, b_disabled boolean, d_created_date timestamp without time zone, d_change_date timestamp without time zone, d_last_auth_date timestamp without time zone, c_email text, c_project_name text, c_claims_name text, b_oidc boolean, jb_data jsonb)
     LANGUAGE plpgsql
     AS $$
 
@@ -24,6 +24,7 @@ BEGIN
                 u.d_last_auth_date,         -- дата последней авторизации
                 u.c_email,                                                                      -- email
                 u.c_project_name,
+                u.b_oidc,
                 concat('.', ( SELECT string_agg(t.c_description, '.'::text) AS string_agg
                         FROM (  SELECT r.c_description
                             FROM core.pd_userinroles uir

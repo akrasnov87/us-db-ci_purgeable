@@ -14,7 +14,8 @@ CREATE TABLE core.pd_accesses (
 	d_created_date timestamp without time zone DEFAULT now() NOT NULL,
 	c_change_user text,
 	d_change_date timestamp without time zone,
-	sn_delete boolean DEFAULT false NOT NULL
+	sn_delete boolean DEFAULT false NOT NULL,
+	dl_id bigint
 );
 
 ALTER TABLE core.pd_accesses OWNER TO us;
@@ -52,6 +53,8 @@ COMMENT ON COLUMN core.pd_accesses.c_change_user IS 'Логин пользова
 COMMENT ON COLUMN core.pd_accesses.d_change_date IS 'Дата обновления записи';
 
 COMMENT ON COLUMN core.pd_accesses.sn_delete IS 'Признак удаления';
+
+COMMENT ON COLUMN core.pd_accesses.dl_id IS 'Вспомогательное поле для объектов Datalens';
 
 --------------------------------------------------------------------------------
 

@@ -15,7 +15,8 @@ CREATE TABLE core.pd_users (
 	d_change_date timestamp without time zone,
 	c_change_user text,
 	sn_delete boolean DEFAULT false NOT NULL,
-	d_expired_date timestamp without time zone
+	d_expired_date timestamp without time zone,
+	b_oidc boolean
 );
 
 ALTER TABLE core.pd_users OWNER TO us;
@@ -53,6 +54,8 @@ COMMENT ON COLUMN core.pd_users.c_change_user IS 'Логин пользоват�
 COMMENT ON COLUMN core.pd_users.sn_delete IS 'Удален';
 
 COMMENT ON COLUMN core.pd_users.d_expired_date IS 'Срок действия';
+
+COMMENT ON COLUMN core.pd_users.b_oidc IS 'Признак, что пользователь создан через OIDC';
 
 --------------------------------------------------------------------------------
 
