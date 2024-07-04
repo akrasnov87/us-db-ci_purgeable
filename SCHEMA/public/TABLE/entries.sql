@@ -31,6 +31,10 @@ CREATE INDEX entries_created_at_idx ON public.entries USING btree (created_at);
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX entries_updated_at_idx ON public.entries USING btree (updated_at);
+
+--------------------------------------------------------------------------------
+
 CREATE INDEX entries_workbook_id_idx ON public.entries USING btree (workbook_id);
 
 --------------------------------------------------------------------------------

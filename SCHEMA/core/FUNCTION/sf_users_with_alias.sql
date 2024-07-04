@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION core.sf_users_with_alias(_f_user integer, _alias boolean) RETURNS TABLE(id integer, c_login text, c_claims text, b_disabled boolean, d_created_date timestamp without time zone, d_change_date timestamp without time zone, d_last_auth_date timestamp without time zone, c_email text, c_project_name text, b_oidc boolean, userName text, c_claims_name text)
+CREATE OR REPLACE FUNCTION core.sf_users_with_alias(_f_user integer, _alias boolean) RETURNS TABLE(id integer, c_login text, c_claims text, b_disabled boolean, d_created_date timestamp without time zone, d_change_date timestamp without time zone, d_last_auth_date timestamp without time zone, c_email text, c_project_name text, b_oidc boolean, username text, c_claims_name text)
     LANGUAGE plpgsql
     AS $$
 /**
@@ -21,7 +21,7 @@ BEGIN
 				u.c_email, -- email
 				u.c_project_name,
 				u.b_oidc,
-				u.jb_data#>>'{name}' AS userName,
+				u.jb_data#>>'{name}' AS username,
 			    concat('.', ( SELECT string_agg(t.c_description, '.'::text) AS string_agg
 			    		FROM ( 	SELECT r.c_description
 			    			FROM core.pd_userinroles uir
