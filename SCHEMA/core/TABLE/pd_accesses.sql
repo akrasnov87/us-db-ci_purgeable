@@ -1,5 +1,5 @@
 CREATE TABLE core.pd_accesses (
-	id smallint DEFAULT nextval('core.auto_id_pd_accesses'::regclass) NOT NULL,
+	id integer DEFAULT nextval('core.auto_id_pd_accesses'::regclass) NOT NULL,
 	f_user integer,
 	f_role smallint,
 	c_name text,

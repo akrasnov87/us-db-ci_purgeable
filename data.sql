@@ -6,11 +6,16 @@ VALUES
 ('master', 'Мастер', 1000, false), 
 ('admin', 'Администратор', 900, true),	
 ('datalens', 'Пользователь', 800, true),	
-('oidc', 'Внешний пользователь', 700, false);
+('oidc', 'Внешний пользователь', 700, true);
+
+-- проекты
+INSERT INTO core.pd_projects(c_name, c_description, b_base)
+VALUES ('datalens-demo', 'Демонстрационные данные', true);
 
 -- первоначальные права доступа
 INSERT INTO core.pd_accesses(f_role, c_name, c_function, b_deletable, b_creatable, b_editable, b_full_control)
 VALUES
+(1,	NULL, 'DL.*',	false,	false,	false,	false),
 (2, 'embed',NULL,	false,	false,	false,	false),
 (2,	'entries',NULL,	false,	true,	false,	false),
 (2,	'workbooks',NULL,	false,	true,	false,	false),
@@ -29,7 +34,6 @@ VALUES
 (2,	'roles',NULL,	false,	false,	false,	false),
 (2, 'rootCollection', NULL,	false,	false,	false,	false),
 (2, 'universal_service', NULL,	false,	true,	false,	false),
-(2,	NULL, 'DL.*',	false,	false,	false,	false),
 (2,	NULL, 'opensource-demo.*',	false,	false,	false,	false),
 (2,	NULL, 'DL.datalens.*',	false,	false,	false,	false),
 (3,	'embed',NULL,	false,	false,	false,	false),
@@ -53,12 +57,12 @@ VALUES
 (3,	NULL, 'DL.datalens.*',	false,	false,	false,	false);
 
 -- пользователь с максимальными правами
-SELECT core.sf_create_user('master', 'qwe-123', '', '["master", "admin"]');
+SELECT core.sf_create_user('master', 'qwe-123', '', '["master", "admin"]', 'datalens-demo');
 
 -- администратор
-SELECT core.sf_create_user('admin', 'qwe-123', '', '["admin"]');
+SELECT core.sf_create_user('admin', 'qwe-123', '', '["admin"]', 'datalens-demo');
 
 -- пользователь
-SELECT core.sf_create_user('user', 'qwe-123', '', '["datalens"]');
+SELECT core.sf_create_user('user', 'qwe-123', '', '["datalens"]', 'datalens-demo');
 
 COMMIT TRANSACTION;

@@ -5,7 +5,8 @@ CREATE TYPE public.scope AS ENUM (
 	'dash',
 	'connection',
 	'widget',
-	'config'
+	'config',
+	'presentation'
 );
 
 ALTER TYPE public.scope OWNER TO us;
