@@ -1,6 +1,17 @@
-CREATE OR REPLACE FUNCTION core.sf_create_embed(_public_key text, _entity_id bigint, _created_by text, _reject text) RETURNS TABLE(decode_id bigint, encode_id text, existsing boolean)
-    LANGUAGE plpgsql ROWS 1
-    AS $$
+START TRANSACTION;
+
+CREATE OR REPLACE FUNCTION core.sf_create_embed(
+	_public_key text,
+	_entity_id bigint,
+	_created_by text,
+	_reject text)
+    RETURNS TABLE(decode_id bigint, encode_id text, existsing boolean) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1
+
+AS $BODY$
 DECLARE
 	_embedding_secret_id			bigint;
 	_embed_id						bigint;
@@ -41,8 +52,18 @@ BEGIN
 	RETURN QUERY
 		SELECT _embed_id, public.encode_id(_embed_id), _existsing;
 END
-$$;
+$BODY$;
 
-ALTER FUNCTION core.sf_create_embed(_public_key text, _entity_id bigint, _created_by text, _reject text) OWNER TO us;
+ALTER FUNCTION core.sf_create_embed(text, bigint, text, text)
+    OWNER TO us;
 
-COMMENT ON FUNCTION core.sf_create_embed(_public_key text, _entity_id bigint, _created_by text, _reject text) IS 'Создание ссылки для "Поделиться"';
+COMMENT ON FUNCTION core.sf_create_embed(text, bigint, text, text)
+    IS 'Создание ссылки для "Поделиться"';
+
+-- добавление безопасности   
+INSERT INTO core.pd_accesses(f_role, c_name, c_function, b_deletable, b_creatable, b_editable, b_full_control)
+VALUES
+(2, 'structure-items',NULL,	false,	false,	false,	false),
+(3, 'structure-items',NULL,	false,	false,	false,	false);
+
+COMMIT TRANSACTION;

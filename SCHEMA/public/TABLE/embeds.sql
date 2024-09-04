@@ -6,7 +6,11 @@ CREATE TABLE public.embeds (
 	deps_ids text[] DEFAULT '{}'::text[] NOT NULL,
 	unsigned_params text[] DEFAULT '{}'::text[] NOT NULL,
 	created_by text NOT NULL,
-	created_at timestamp with time zone DEFAULT now() NOT NULL
+	created_at timestamp with time zone DEFAULT now() NOT NULL,
+	private_params text[] DEFAULT '{}'::text[] NOT NULL,
+	public_params_mode boolean DEFAULT true NOT NULL,
+	updated_by text NOT NULL,
+	updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 ALTER TABLE public.embeds OWNER TO us;
@@ -18,6 +22,10 @@ CREATE INDEX embeds_embedding_secret_id_idx ON public.embeds USING btree (embedd
 --------------------------------------------------------------------------------
 
 CREATE INDEX embeds_entry_id_idx ON public.embeds USING btree (entry_id);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX embeds_updated_at_idx ON public.embeds USING btree (updated_at);
 
 --------------------------------------------------------------------------------
 
