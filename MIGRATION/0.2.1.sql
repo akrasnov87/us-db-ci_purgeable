@@ -1,3 +1,5 @@
+START TRANSACTION;
+
 CREATE VIEW public.dl_access AS
 	SELECT t.user_id,
     t.object_id,
@@ -22,3 +24,11 @@ CREATE VIEW public.dl_access AS
           WHERE starts_with(a.c_function, 'DL.'::text)) t;
 
 ALTER VIEW public.dl_access OWNER TO us;
+
+-- добавление безопасности   
+INSERT INTO core.pd_accesses(f_role, c_name, c_function, b_deletable, b_creatable, b_editable, b_full_control)
+VALUES
+(2, 'move-workbooks', NULL,	false,	true,	false,	false),
+(3, 'move-workbooks', NULL,	false,	true,	false,	false);
+
+COMMIT TRANSACTION;
