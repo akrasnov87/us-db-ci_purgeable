@@ -32,6 +32,11 @@ COMMENT ON COLUMN core.pd_userinroles.sn_delete IS 'Признак удален�
 --------------------------------------------------------------------------------
 
 ALTER TABLE core.pd_userinroles
+	ADD CONSTRAINT pd_userinroles_f_role_f_user_uniq UNIQUE (f_role, f_user);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE core.pd_userinroles
 	ADD CONSTRAINT pd_userinroles_f_role_fkey FOREIGN KEY (f_role) REFERENCES core.pd_roles(id);
 
 --------------------------------------------------------------------------------

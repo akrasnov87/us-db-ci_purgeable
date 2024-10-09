@@ -20,6 +20,14 @@ ALTER TABLE public.comments OWNER TO us;
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX comments_date_until_idx ON public.comments USING btree (date_until);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX comments_feed_lower_is_removed_date_date_until_idx ON public.comments USING btree (is_removed, lower(feed), date, date_until);
+
+--------------------------------------------------------------------------------
+
 CREATE INDEX comments_is_removed_feed_date_date_until_idx ON public.comments USING btree (is_removed, feed, date, date_until);
 
 --------------------------------------------------------------------------------

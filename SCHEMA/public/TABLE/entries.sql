@@ -31,6 +31,11 @@ CREATE INDEX entries_created_at_idx ON public.entries USING btree (created_at);
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX entries_root_tenant_id_idx ON public.entries USING btree (tenant_id)
+WHERE (key !~~ '_%/_%'::text);
+
+--------------------------------------------------------------------------------
+
 CREATE INDEX entries_updated_at_idx ON public.entries USING btree (updated_at);
 
 --------------------------------------------------------------------------------

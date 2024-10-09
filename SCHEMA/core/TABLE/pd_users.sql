@@ -16,7 +16,9 @@ CREATE TABLE core.pd_users (
 	c_change_user text,
 	sn_delete boolean DEFAULT false NOT NULL,
 	d_expired_date timestamp without time zone,
-	b_oidc boolean
+	b_oidc boolean,
+	budibase_user_id text,
+	_id text
 );
 
 ALTER TABLE core.pd_users OWNER TO us;
