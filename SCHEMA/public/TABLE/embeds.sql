@@ -10,7 +10,8 @@ CREATE TABLE public.embeds (
 	private_params text[] DEFAULT '{}'::text[] NOT NULL,
 	public_params_mode boolean DEFAULT true NOT NULL,
 	updated_by text NOT NULL,
-	updated_at timestamp with time zone DEFAULT now() NOT NULL
+	updated_at timestamp with time zone DEFAULT now() NOT NULL,
+	settings jsonb DEFAULT '{}'::jsonb
 );
 
 ALTER TABLE public.embeds OWNER TO us;

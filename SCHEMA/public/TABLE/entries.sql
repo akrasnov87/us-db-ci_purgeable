@@ -1,5 +1,5 @@
 CREATE TABLE public.entries (
-	scope public.scope,
+	scope public.scope NOT NULL,
 	type text NOT NULL,
 	key text,
 	inner_meta jsonb,
@@ -33,6 +33,10 @@ CREATE INDEX entries_created_at_idx ON public.entries USING btree (created_at);
 
 CREATE INDEX entries_root_tenant_id_idx ON public.entries USING btree (tenant_id)
 WHERE (key !~~ '_%/_%'::text);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX entries_tenant_id_scope_idx ON public.entries USING btree (tenant_id, scope);
 
 --------------------------------------------------------------------------------
 
