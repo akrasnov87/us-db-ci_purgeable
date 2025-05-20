@@ -31,6 +31,10 @@ CREATE INDEX entries_created_at_idx ON public.entries USING btree (created_at);
 
 --------------------------------------------------------------------------------
 
+CREATE INDEX entries_created_by_idx ON public.entries USING btree (created_by);
+
+--------------------------------------------------------------------------------
+
 CREATE INDEX entries_root_tenant_id_idx ON public.entries USING btree (tenant_id)
 WHERE (key !~~ '_%/_%'::text);
 
@@ -61,6 +65,14 @@ CREATE INDEX public_idx ON public.entries USING btree (public);
 --------------------------------------------------------------------------------
 
 CREATE INDEX sort_name_idx ON public.entries USING btree (sort_name);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX tenant_id_folder_scope_idx ON public.entries USING btree (tenant_id, (
+CASE
+    WHEN (scope = 'folder'::public.scope) THEN 0
+    ELSE 1
+END));
 
 --------------------------------------------------------------------------------
 

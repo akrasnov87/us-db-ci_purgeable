@@ -22,7 +22,7 @@ WHERE (is_default = true);
 --------------------------------------------------------------------------------
 
 ALTER TABLE public.color_palettes
-	ADD CONSTRAINT color_palettes_non_empty_name_constraint CHECK ((btrim(name) <> ''::text));
+	ADD CONSTRAINT color_palettes_non_empty_name_constraint CHECK ((TRIM(BOTH FROM name) <> ''::text));
 
 --------------------------------------------------------------------------------
 

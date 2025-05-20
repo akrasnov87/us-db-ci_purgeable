@@ -14,7 +14,8 @@ CREATE TABLE public.workbooks (
 	updated_by text,
 	updated_at timestamp with time zone DEFAULT now() NOT NULL,
 	title_lower text NOT NULL,
-	sort_title bytea NOT NULL
+	sort_title bytea NOT NULL,
+	status public.workbook_status_enum DEFAULT 'active'::public.workbook_status_enum NOT NULL
 );
 
 ALTER TABLE public.workbooks OWNER TO us;

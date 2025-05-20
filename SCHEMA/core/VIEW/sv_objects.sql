@@ -1,10 +1,10 @@
 CREATE VIEW core.sv_objects AS
-	SELECT table1.table_name,
-    table1.table_type,
-    table1.table_title,
-    table1.primary_key,
-    table1.table_comment,
-    table1.table_schema
+	SELECT table_name,
+    table_type,
+    table_title,
+    primary_key,
+    table_comment,
+    table_schema
    FROM ( SELECT (t.table_name)::character varying AS table_name,
             (t.table_type)::character varying AS table_type,
             (pgd.description)::character varying AS table_title,
@@ -39,6 +39,6 @@ CREATE VIEW core.sv_objects AS
              LEFT JOIN pg_proc pgp ON ((pgp.proname = (r.routine_name)::name)))
              LEFT JOIN pg_description pgd ON ((pgd.objoid = pgp.oid)))
           WHERE ((r.routine_catalog)::text = (current_database())::text)) table1
-  WHERE (((table1.table_schema)::text <> 'pg_catalog'::text) AND ((table1.table_schema)::text <> 'information_schema'::text) AND ((table1.table_schema)::text <> 'public'::text));
+  WHERE (((table_schema)::text <> 'pg_catalog'::text) AND ((table_schema)::text <> 'information_schema'::text) AND ((table_schema)::text <> 'public'::text));
 
 ALTER VIEW core.sv_objects OWNER TO us;

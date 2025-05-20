@@ -14,7 +14,8 @@ CREATE TABLE public.tenants (
 	billing_paused_by_user boolean DEFAULT false NOT NULL,
 	billing_instance_service_is_active boolean DEFAULT false NOT NULL,
 	billing_ended_at timestamp with time zone,
-	settings jsonb DEFAULT '{}'::jsonb
+	settings jsonb DEFAULT '{}'::jsonb,
+	features jsonb DEFAULT '{}'::jsonb
 );
 
 ALTER TABLE public.tenants OWNER TO us;
