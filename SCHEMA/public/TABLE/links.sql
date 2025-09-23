@@ -4,7 +4,7 @@ CREATE TABLE public.links (
 	name text NOT NULL
 );
 
-ALTER TABLE public.links OWNER TO us;
+ALTER TABLE public.links OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

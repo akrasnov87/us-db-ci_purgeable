@@ -24,6 +24,6 @@ BEGIN
 END;
 $$;
 
-ALTER FUNCTION core.pf_accesses(n_user_id integer) OWNER TO us;
+ALTER FUNCTION core.pf_accesses(n_user_id integer) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.pf_accesses(n_user_id integer) IS 'Системная функция. Получение прав доступа для пользователя';

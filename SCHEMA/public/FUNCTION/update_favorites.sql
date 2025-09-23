@@ -7,4 +7,4 @@ CREATE OR REPLACE FUNCTION public.update_favorites() RETURNS trigger
             END
         $$;
 
-ALTER FUNCTION public.update_favorites() OWNER TO us;
+ALTER FUNCTION public.update_favorites() OWNER TO "pg-user";

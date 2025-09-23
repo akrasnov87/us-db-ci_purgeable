@@ -5,7 +5,7 @@ CREATE SEQUENCE core.sd_logs_id_seq
 	NO MINVALUE
 	CACHE 1;
 
-ALTER SEQUENCE core.sd_logs_id_seq OWNER TO us;
+ALTER SEQUENCE core.sd_logs_id_seq OWNER TO "pg-user";
 
 ALTER SEQUENCE core.sd_logs_id_seq
 	OWNED BY core.sd_logs.id;

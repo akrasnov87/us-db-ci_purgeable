@@ -7,7 +7,7 @@ CREATE TABLE public.embedding_secrets (
 	created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
-ALTER TABLE public.embedding_secrets OWNER TO us;
+ALTER TABLE public.embedding_secrets OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

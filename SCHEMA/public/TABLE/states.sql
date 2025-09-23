@@ -5,7 +5,7 @@ CREATE TABLE public.states (
 	created_at timestamp with time zone DEFAULT now()
 );
 
-ALTER TABLE public.states OWNER TO us;
+ALTER TABLE public.states OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

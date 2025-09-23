@@ -4,7 +4,7 @@ CREATE TABLE public.user_settings (
 	updated_at timestamp with time zone DEFAULT now()
 );
 
-ALTER TABLE public.user_settings OWNER TO us;
+ALTER TABLE public.user_settings OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

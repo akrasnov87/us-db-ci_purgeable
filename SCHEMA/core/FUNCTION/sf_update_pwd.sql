@@ -46,6 +46,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.sf_update_pwd(_login text, _password text, _new_password text) OWNER TO us;
+ALTER FUNCTION core.sf_update_pwd(_login text, _password text, _new_password text) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_update_pwd(_login text, _password text, _new_password text) IS 'Замена пароля пользователя';

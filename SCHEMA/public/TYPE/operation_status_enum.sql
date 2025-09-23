@@ -4,4 +4,4 @@ CREATE TYPE public.operation_status_enum AS ENUM (
 	'done'
 );
 
-ALTER TYPE public.operation_status_enum OWNER TO us;
+ALTER TYPE public.operation_status_enum OWNER TO "pg-user";

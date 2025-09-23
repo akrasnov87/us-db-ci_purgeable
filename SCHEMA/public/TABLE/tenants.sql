@@ -15,10 +15,11 @@ CREATE TABLE public.tenants (
 	billing_instance_service_is_active boolean DEFAULT false NOT NULL,
 	billing_ended_at timestamp with time zone,
 	settings jsonb DEFAULT '{}'::jsonb,
-	features jsonb DEFAULT '{}'::jsonb
+	features jsonb DEFAULT '{}'::jsonb,
+	trial_ended_at timestamp with time zone
 );
 
-ALTER TABLE public.tenants OWNER TO us;
+ALTER TABLE public.tenants OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

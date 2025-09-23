@@ -3,7 +3,7 @@ CREATE TABLE public.templates (
 	data jsonb
 );
 
-ALTER TABLE public.templates OWNER TO us;
+ALTER TABLE public.templates OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

@@ -16,4 +16,4 @@ CREATE OR REPLACE FUNCTION public.get_id(OUT result bigint) RETURNS bigint
     END;
     $$;
 
-ALTER FUNCTION public.get_id(OUT result bigint) OWNER TO us;
+ALTER FUNCTION public.get_id(OUT result bigint) OWNER TO "pg-user";

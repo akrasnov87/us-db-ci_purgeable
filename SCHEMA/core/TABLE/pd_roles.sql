@@ -12,7 +12,7 @@ CREATE TABLE core.pd_roles (
 	_id text
 );
 
-ALTER TABLE core.pd_roles OWNER TO us;
+ALTER TABLE core.pd_roles OWNER TO "pg-user";
 
 COMMENT ON TABLE core.pd_roles IS 'Роли';
 

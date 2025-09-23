@@ -7,4 +7,4 @@ CREATE OR REPLACE FUNCTION public.update_collections() RETURNS trigger
             END
         $$;
 
-ALTER FUNCTION public.update_collections() OWNER TO us;
+ALTER FUNCTION public.update_collections() OWNER TO "pg-user";

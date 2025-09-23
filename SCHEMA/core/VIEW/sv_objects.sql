@@ -41,4 +41,4 @@ CREATE VIEW core.sv_objects AS
           WHERE ((r.routine_catalog)::text = (current_database())::text)) table1
   WHERE (((table_schema)::text <> 'pg_catalog'::text) AND ((table_schema)::text <> 'information_schema'::text) AND ((table_schema)::text <> 'public'::text));
 
-ALTER VIEW core.sv_objects OWNER TO us;
+ALTER VIEW core.sv_objects OWNER TO "pg-user";

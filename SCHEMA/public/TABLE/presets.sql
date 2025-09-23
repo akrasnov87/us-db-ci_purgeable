@@ -4,7 +4,7 @@ CREATE TABLE public.presets (
 	data jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
-ALTER TABLE public.presets OWNER TO us;
+ALTER TABLE public.presets OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

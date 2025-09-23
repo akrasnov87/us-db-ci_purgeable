@@ -7,7 +7,7 @@ CREATE TABLE public.locks (
 	start_date timestamp with time zone DEFAULT now()
 );
 
-ALTER TABLE public.locks OWNER TO us;
+ALTER TABLE public.locks OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

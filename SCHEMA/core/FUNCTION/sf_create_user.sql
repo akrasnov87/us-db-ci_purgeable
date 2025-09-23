@@ -26,6 +26,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.sf_create_user(_login text, _password text, _email text, _claims json, _project_name text) OWNER TO us;
+ALTER FUNCTION core.sf_create_user(_login text, _password text, _email text, _claims json, _project_name text) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_create_user(_login text, _password text, _email text, _claims json, _project_name text) IS 'Создание пользователя';

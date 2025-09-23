@@ -21,7 +21,7 @@ CREATE TABLE core.pd_users (
 	_id text
 );
 
-ALTER TABLE core.pd_users OWNER TO us;
+ALTER TABLE core.pd_users OWNER TO "pg-user";
 
 COMMENT ON TABLE core.pd_users IS 'Пользователи / Организации';
 

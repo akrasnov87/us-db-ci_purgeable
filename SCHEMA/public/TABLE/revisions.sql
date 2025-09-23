@@ -7,10 +7,11 @@ CREATE TABLE public.revisions (
 	updated_at timestamp with time zone DEFAULT now(),
 	rev_id bigint DEFAULT public.get_id() NOT NULL,
 	entry_id bigint,
-	links jsonb
+	links jsonb,
+	annotation jsonb
 );
 
-ALTER TABLE public.revisions OWNER TO us;
+ALTER TABLE public.revisions OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

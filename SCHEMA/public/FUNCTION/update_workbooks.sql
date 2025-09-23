@@ -7,4 +7,4 @@ CREATE OR REPLACE FUNCTION public.update_workbooks() RETURNS trigger
             END
         $$;
 
-ALTER FUNCTION public.update_workbooks() OWNER TO us;
+ALTER FUNCTION public.update_workbooks() OWNER TO "pg-user";

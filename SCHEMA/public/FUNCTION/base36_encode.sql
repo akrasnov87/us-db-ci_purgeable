@@ -18,4 +18,4 @@ CREATE OR REPLACE FUNCTION public.base36_encode(digits bigint, coding_base chara
     END;
     $$;
 
-ALTER FUNCTION public.base36_encode(digits bigint, coding_base character[]) OWNER TO us;
+ALTER FUNCTION public.base36_encode(digits bigint, coding_base character[]) OWNER TO "pg-user";

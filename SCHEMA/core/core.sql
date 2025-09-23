@@ -1,3 +1,3 @@
 CREATE SCHEMA core;
 
-ALTER SCHEMA core OWNER TO us;
+ALTER SCHEMA core OWNER TO "pg-user";

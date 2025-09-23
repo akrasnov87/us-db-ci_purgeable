@@ -8,7 +8,7 @@ CREATE TABLE public.favorites (
 	sort_alias bytea
 );
 
-ALTER TABLE public.favorites OWNER TO us;
+ALTER TABLE public.favorites OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

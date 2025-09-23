@@ -5,4 +5,4 @@ CREATE SEQUENCE core.auto_id_pd_userinroles
 	NO MINVALUE
 	CACHE 1;
 
-ALTER SEQUENCE core.auto_id_pd_userinroles OWNER TO us;
+ALTER SEQUENCE core.auto_id_pd_userinroles OWNER TO "pg-user";

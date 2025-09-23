@@ -18,7 +18,7 @@ CREATE TABLE public.workbooks (
 	status public.workbook_status_enum DEFAULT 'active'::public.workbook_status_enum NOT NULL
 );
 
-ALTER TABLE public.workbooks OWNER TO us;
+ALTER TABLE public.workbooks OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

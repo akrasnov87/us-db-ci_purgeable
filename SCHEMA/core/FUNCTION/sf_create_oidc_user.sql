@@ -23,6 +23,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.sf_create_oidc_user(_login text, _token text, _jb_data jsonb) OWNER TO us;
+ALTER FUNCTION core.sf_create_oidc_user(_login text, _token text, _jb_data jsonb) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_create_oidc_user(_login text, _token text, _jb_data jsonb) IS 'Создание пользователя авторизовавшегося через OIDC';

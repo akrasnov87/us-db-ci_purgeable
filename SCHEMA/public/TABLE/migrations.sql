@@ -5,7 +5,7 @@ CREATE TABLE public.migrations (
 	migration_time timestamp with time zone
 );
 
-ALTER TABLE public.migrations OWNER TO us;
+ALTER TABLE public.migrations OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

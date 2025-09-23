@@ -33,6 +33,6 @@ BEGIN
 END;
 $$;
 
-ALTER FUNCTION core.sf_users_with_alias(_f_user integer, _alias boolean) OWNER TO us;
+ALTER FUNCTION core.sf_users_with_alias(_f_user integer, _alias boolean) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_users_with_alias(_f_user integer, _alias boolean) IS 'Системная функция. Получение информации о пользователе';

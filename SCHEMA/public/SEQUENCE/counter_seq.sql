@@ -5,4 +5,4 @@ CREATE SEQUENCE public.counter_seq
 	NO MINVALUE
 	CACHE 1;
 
-ALTER SEQUENCE public.counter_seq OWNER TO us;
+ALTER SEQUENCE public.counter_seq OWNER TO "pg-user";

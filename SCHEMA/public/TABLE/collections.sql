@@ -16,7 +16,7 @@ CREATE TABLE public.collections (
 	sort_title bytea NOT NULL
 );
 
-ALTER TABLE public.collections OWNER TO us;
+ALTER TABLE public.collections OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

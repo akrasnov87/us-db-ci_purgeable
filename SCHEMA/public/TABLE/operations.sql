@@ -14,7 +14,7 @@ CREATE TABLE public.operations (
 	tenant_id text
 );
 
-ALTER TABLE public.operations OWNER TO us;
+ALTER TABLE public.operations OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

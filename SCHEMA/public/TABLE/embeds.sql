@@ -14,7 +14,7 @@ CREATE TABLE public.embeds (
 	settings jsonb DEFAULT '{}'::jsonb
 );
 
-ALTER TABLE public.embeds OWNER TO us;
+ALTER TABLE public.embeds OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

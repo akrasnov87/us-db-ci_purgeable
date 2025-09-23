@@ -5,4 +5,4 @@ CREATE TYPE public.comment_type AS ENUM (
 	'dot-x-y'
 );
 
-ALTER TYPE public.comment_type OWNER TO us;
+ALTER TYPE public.comment_type OWNER TO "pg-user";

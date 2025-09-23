@@ -1,6 +1,5 @@
 CREATE TABLE public.data_exports (
 	data_export_id bigint DEFAULT public.get_id() NOT NULL,
-	title text NOT NULL,
 	tenant_id text DEFAULT 'common'::text NOT NULL,
 	chart_id bigint,
 	chart_rev_id bigint,
@@ -10,17 +9,20 @@ CREATE TABLE public.data_exports (
 	connection_rev_id bigint,
 	params jsonb DEFAULT '{}'::jsonb NOT NULL,
 	created_by text NOT NULL,
-	updated_by text,
 	created_at timestamp with time zone DEFAULT now() NOT NULL,
-	updated_at timestamp with time zone,
-	expired_at timestamp with time zone NOT NULL,
+	expired_at timestamp with time zone,
 	job_id text NOT NULL,
 	s3_key text,
 	error jsonb,
-	upload_id text
+	upload_id text,
+	status public.data_export_status DEFAULT 'IN_PROGRESS'::public.data_export_status NOT NULL,
+	size bigint,
+	finished_at timestamp with time zone,
+	cancelled_by text,
+	cancelled_at timestamp with time zone
 );
 
-ALTER TABLE public.data_exports OWNER TO us;
+ALTER TABLE public.data_exports OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 
@@ -37,6 +39,26 @@ CREATE INDEX data_exports_dataset_id_idx ON public.data_exports USING btree (dat
 --------------------------------------------------------------------------------
 
 CREATE INDEX data_exports_expired_at_idx ON public.data_exports USING btree (expired_at);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX idx_data_exports_created_at ON public.data_exports USING btree (created_at);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX idx_data_exports_expired_at ON public.data_exports USING btree (expired_at);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX idx_data_exports_finished_at ON public.data_exports USING btree (finished_at);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX idx_data_exports_size ON public.data_exports USING btree (size);
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX idx_data_exports_status ON public.data_exports USING btree (status);
 
 --------------------------------------------------------------------------------
 

@@ -6,7 +6,7 @@ CREATE SEQUENCE public.migrations_lock_index_seq
 	NO MINVALUE
 	CACHE 1;
 
-ALTER SEQUENCE public.migrations_lock_index_seq OWNER TO us;
+ALTER SEQUENCE public.migrations_lock_index_seq OWNER TO "pg-user";
 
 ALTER SEQUENCE public.migrations_lock_index_seq
 	OWNED BY public.migrations_lock.index;

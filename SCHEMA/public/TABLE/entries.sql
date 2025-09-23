@@ -20,10 +20,15 @@ CREATE TABLE public.entries (
 	public boolean DEFAULT false,
 	unversioned_data jsonb DEFAULT '{}'::jsonb,
 	workbook_id bigint,
-	mirrored boolean DEFAULT false
+	mirrored boolean DEFAULT false,
+	collection_id bigint
 );
 
-ALTER TABLE public.entries OWNER TO us;
+ALTER TABLE public.entries OWNER TO "pg-user";
+
+--------------------------------------------------------------------------------
+
+CREATE INDEX entries_collection_id_idx ON public.entries USING btree (collection_id);
 
 --------------------------------------------------------------------------------
 
@@ -35,12 +40,15 @@ CREATE INDEX entries_created_by_idx ON public.entries USING btree (created_by);
 
 --------------------------------------------------------------------------------
 
-CREATE INDEX entries_root_tenant_id_idx ON public.entries USING btree (tenant_id)
-WHERE (key !~~ '_%/_%'::text);
+CREATE INDEX entries_tenant_id_parent_folder_idx ON public.entries USING btree (tenant_id, rtrim(rtrim(key, '/'::text), name));
 
 --------------------------------------------------------------------------------
 
 CREATE INDEX entries_tenant_id_scope_idx ON public.entries USING btree (tenant_id, scope);
+
+--------------------------------------------------------------------------------
+
+CREATE UNIQUE INDEX entries_uniq_scope_name_conllection_id_idx ON public.entries USING btree (scope, name, collection_id);
 
 --------------------------------------------------------------------------------
 
@@ -68,14 +76,6 @@ CREATE INDEX sort_name_idx ON public.entries USING btree (sort_name);
 
 --------------------------------------------------------------------------------
 
-CREATE INDEX tenant_id_folder_scope_idx ON public.entries USING btree (tenant_id, (
-CASE
-    WHEN (scope = 'folder'::public.scope) THEN 0
-    ELSE 1
-END));
-
---------------------------------------------------------------------------------
-
 CREATE UNIQUE INDEX tenant_id_key_idx ON public.entries USING btree (tenant_id, key);
 
 --------------------------------------------------------------------------------
@@ -88,7 +88,17 @@ CREATE TRIGGER before_entries_insert_or_update
 --------------------------------------------------------------------------------
 
 ALTER TABLE public.entries
+	ADD CONSTRAINT entries_collection_id_ref FOREIGN KEY (collection_id) REFERENCES public.collections(collection_id) ON DELETE CASCADE;
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE public.entries
 	ADD CONSTRAINT entries_pkey PRIMARY KEY (entry_id);
+
+--------------------------------------------------------------------------------
+
+ALTER TABLE public.entries
+	ADD CONSTRAINT entries_single_container_constraint CHECK ((NOT ((workbook_id IS NOT NULL) AND (collection_id IS NOT NULL))));
 
 --------------------------------------------------------------------------------
 

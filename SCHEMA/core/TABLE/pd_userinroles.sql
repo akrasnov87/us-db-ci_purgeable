@@ -9,7 +9,7 @@ CREATE TABLE core.pd_userinroles (
 	sn_delete boolean DEFAULT false
 );
 
-ALTER TABLE core.pd_userinroles OWNER TO us;
+ALTER TABLE core.pd_userinroles OWNER TO "pg-user";
 
 COMMENT ON TABLE core.pd_userinroles IS 'Пользователи в ролях';
 

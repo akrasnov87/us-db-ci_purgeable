@@ -9,4 +9,4 @@ CREATE TYPE public.scope AS ENUM (
 	'report'
 );
 
-ALTER TYPE public.scope OWNER TO us;
+ALTER TYPE public.scope OWNER TO "pg-user";

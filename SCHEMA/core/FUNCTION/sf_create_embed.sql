@@ -43,6 +43,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.sf_create_embed(_public_key text, _entity_id bigint, _created_by text, _reject text) OWNER TO us;
+ALTER FUNCTION core.sf_create_embed(_public_key text, _entity_id bigint, _created_by text, _reject text) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_create_embed(_public_key text, _entity_id bigint, _created_by text, _reject text) IS 'Создание ссылки для "Поделиться"';

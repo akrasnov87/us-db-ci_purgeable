@@ -19,4 +19,4 @@ CREATE OR REPLACE FUNCTION public.naturalsort(text) RETURNS bytea
             ) r;
         $_$;
 
-ALTER FUNCTION public.naturalsort(text) OWNER TO us;
+ALTER FUNCTION public.naturalsort(text) OWNER TO "pg-user";

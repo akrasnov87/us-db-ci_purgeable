@@ -18,7 +18,7 @@ CREATE TABLE core.pd_accesses (
 	dl_id bigint
 );
 
-ALTER TABLE core.pd_accesses OWNER TO us;
+ALTER TABLE core.pd_accesses OWNER TO "pg-user";
 
 COMMENT ON TABLE core.pd_accesses IS 'Права доступа';
 

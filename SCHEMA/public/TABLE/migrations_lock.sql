@@ -3,7 +3,7 @@ CREATE TABLE public.migrations_lock (
 	is_locked integer
 );
 
-ALTER TABLE public.migrations_lock OWNER TO us;
+ALTER TABLE public.migrations_lock OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

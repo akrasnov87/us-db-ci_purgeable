@@ -10,7 +10,7 @@ CREATE TABLE core.pd_projects (
 	sn_delete boolean DEFAULT false NOT NULL
 );
 
-ALTER TABLE core.pd_projects OWNER TO us;
+ALTER TABLE core.pd_projects OWNER TO "pg-user";
 
 COMMENT ON TABLE core.pd_projects IS 'Проекты';
 

@@ -39,6 +39,6 @@ BEGIN
 END;
 $$;
 
-ALTER FUNCTION core.of_users(sender jsonb, params jsonb) OWNER TO us;
+ALTER FUNCTION core.of_users(sender jsonb, params jsonb) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.of_users(sender jsonb, params jsonb) IS 'Получение списка пользователей';

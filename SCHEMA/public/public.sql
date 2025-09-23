@@ -1,5 +1,5 @@
 CREATE SCHEMA public;
 
-ALTER SCHEMA public OWNER TO us;
+ALTER SCHEMA public OWNER TO pg_database_owner;
 
-GRANT ALL ON SCHEMA public TO PUBLIC;
+GRANT USAGE ON SCHEMA public TO PUBLIC;

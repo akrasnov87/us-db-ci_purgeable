@@ -37,4 +37,4 @@ CREATE OR REPLACE FUNCTION public.encode_id(id bigint) RETURNS text
     END;
     $$;
 
-ALTER FUNCTION public.encode_id(id bigint) OWNER TO us;
+ALTER FUNCTION public.encode_id(id bigint) OWNER TO "pg-user";

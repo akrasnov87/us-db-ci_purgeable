@@ -13,4 +13,4 @@ CREATE OR REPLACE FUNCTION public.update_entries() RETURNS trigger
         END
         $_$;
 
-ALTER FUNCTION public.update_entries() OWNER TO us;
+ALTER FUNCTION public.update_entries() OWNER TO "pg-user";

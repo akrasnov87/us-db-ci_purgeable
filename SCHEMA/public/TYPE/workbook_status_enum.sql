@@ -5,4 +5,4 @@ CREATE TYPE public.workbook_status_enum AS ENUM (
 	'deleted'
 );
 
-ALTER TYPE public.workbook_status_enum OWNER TO us;
+ALTER TYPE public.workbook_status_enum OWNER TO "pg-user";

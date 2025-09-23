@@ -8,7 +8,7 @@ CREATE TABLE public.color_palettes (
 	is_default boolean DEFAULT false NOT NULL
 );
 
-ALTER TABLE public.color_palettes OWNER TO us;
+ALTER TABLE public.color_palettes OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 

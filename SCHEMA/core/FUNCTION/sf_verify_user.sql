@@ -52,6 +52,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.sf_verify_user(_login text, _password text, _c_ip text, _c_name text, _n_key integer, _b_key_mode boolean) OWNER TO us;
+ALTER FUNCTION core.sf_verify_user(_login text, _password text, _c_ip text, _c_name text, _n_key integer, _b_key_mode boolean) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_verify_user(_login text, _password text, _c_ip text, _c_name text, _n_key integer, _b_key_mode boolean) IS 'Проверка пользователя на авторизацию';

@@ -19,6 +19,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.pf_update_user_roles(_user_id integer, _claims json) OWNER TO us;
+ALTER FUNCTION core.pf_update_user_roles(_user_id integer, _claims json) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.pf_update_user_roles(_user_id integer, _claims json) IS 'Обновление ролей у пользователя';

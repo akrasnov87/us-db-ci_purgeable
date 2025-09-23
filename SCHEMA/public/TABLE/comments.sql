@@ -16,7 +16,7 @@ CREATE TABLE public.comments (
 	remover_login text
 );
 
-ALTER TABLE public.comments OWNER TO us;
+ALTER TABLE public.comments OWNER TO "pg-user";
 
 --------------------------------------------------------------------------------
 
@@ -24,11 +24,11 @@ CREATE INDEX comments_date_until_idx ON public.comments USING btree (date_until)
 
 --------------------------------------------------------------------------------
 
-CREATE INDEX comments_feed_lower_is_removed_date_date_until_idx ON public.comments USING btree (is_removed, lower((feed COLLATE "en_US.utf8")), date, date_until);
+CREATE INDEX comments_is_removed_feed_date_date_until_idx ON public.comments USING btree (is_removed, feed, date, date_until);
 
 --------------------------------------------------------------------------------
 
-CREATE INDEX comments_is_removed_feed_date_date_until_idx ON public.comments USING btree (is_removed, feed, date, date_until);
+CREATE INDEX comments_is_removed_feed_lower_date_date_until_idx ON public.comments USING btree (is_removed, lower(feed), date, date_until);
 
 --------------------------------------------------------------------------------
 

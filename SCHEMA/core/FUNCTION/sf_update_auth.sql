@@ -20,6 +20,6 @@ BEGIN
 END
 $$;
 
-ALTER FUNCTION core.sf_update_auth(_c_version text, _f_user integer, _n_key integer, _c_ip text, _c_name text, _b_key_mode boolean) OWNER TO us;
+ALTER FUNCTION core.sf_update_auth(_c_version text, _f_user integer, _n_key integer, _c_ip text, _c_name text, _b_key_mode boolean) OWNER TO "pg-user";
 
 COMMENT ON FUNCTION core.sf_update_auth(_c_version text, _f_user integer, _n_key integer, _c_ip text, _c_name text, _b_key_mode boolean) IS 'Обновление информации об авторизации';
