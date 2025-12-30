@@ -16,7 +16,9 @@ CREATE TABLE public.tenants (
 	billing_ended_at timestamp with time zone,
 	settings jsonb DEFAULT '{}'::jsonb,
 	features jsonb DEFAULT '{}'::jsonb,
-	trial_ended_at timestamp with time zone
+	trial_ended_at timestamp with time zone,
+	trial_without_billing boolean,
+	billing_discount real
 );
 
 ALTER TABLE public.tenants OWNER TO "pg-user";
