@@ -18,7 +18,8 @@ CREATE TABLE public.tenants (
 	features jsonb DEFAULT '{}'::jsonb,
 	trial_ended_at timestamp with time zone,
 	trial_without_billing boolean,
-	billing_discount real
+	billing_discount real,
+	billing_instance_service_updated_at timestamp with time zone
 );
 
 ALTER TABLE public.tenants OWNER TO "pg-user";

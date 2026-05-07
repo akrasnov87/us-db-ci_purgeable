@@ -8,7 +8,9 @@ CREATE TABLE public.revisions (
 	rev_id bigint DEFAULT public.get_id() NOT NULL,
 	entry_id bigint,
 	links jsonb,
-	annotation jsonb
+	annotation jsonb,
+	version integer,
+	source_version integer
 );
 
 ALTER TABLE public.revisions OWNER TO "pg-user";
